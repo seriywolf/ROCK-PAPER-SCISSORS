@@ -15,7 +15,25 @@
             else if(randomNumber === 2) return "Scissors"
             else if(randomNumber === 3) return "Paper";
         };
-        console.log(computerPlay());
+        //console.log(computerPlay());
+
+    const playRound = (playerSelect) => {
+        const playerSelection = playerSelect.toLowerCase();
+        const computerSelection = computerPlay().toLowerCase();
+        //console.log("Computer choise is " + computerSelection);
+        
+        if (computerSelection === playerSelection) return "Both choices equal"
+
+        else if (((playerSelection === 'rock') && (computerSelection === 'paper')) ||
+         ((playerSelection === 'paper') && (computerSelection === 'scissors')) ||
+         ((playerSelection === 'scissors') && (computerSelection === 'rock')))
+        return `"You Lose! ${computerSelection} beats ${playerSelection}"`
+
+        else if (((playerSelection === 'rock') && (computerSelection === 'scissors')) ||
+         ((playerSelection === 'paper') && (computerSelection === 'rock')) ||
+         ((playerSelection === 'scissors') && (computerSelection === 'paper')))
+        return `"You Win! ${playerSelection} beats ${computerSelection}"`;
+    };
     </script>
 </body>
 </html>
