@@ -9,8 +9,9 @@
 </head>
 
 <body>
+    <button>Start game!</button>
+    <p class="result"></p>
     <script>
-
         const computerPlay = () => {
             const randomNumber = Math.floor((Math.random() * 3) + 1);
             //console.log(randomNumber);
@@ -46,18 +47,23 @@
 
             for (i = 0; i<5; i++) {
                 //console.log(playRound(computerPlay(), window.prompt()));
-                user += playRound(computerPlay(), window.prompt());
+                user += playRound(computerPlay(), window.prompt("Rock, Paper or Scissors?"));
             };
 
-            if (user>computer) {
-                console.log("You Win!");
-            } else if(computer>user){
-                console.log("You Lose!");
-            }
-            else if(computer === user){
-                console.log("Equal!");
-            };
+            if (user>computer) 
+                return "You Win!"
+             else if(computer>user)
+                return "You Lose!"
+            else if(computer === user)
+                return "Equal!";
+            
         }
+        const btn = document.querySelector("button");
+        const p = document.querySelector(".result");
+        btn.onclick = () =>{ 
+            p.textContent = game();
+        };
+        
     </script>
 </body>
 
