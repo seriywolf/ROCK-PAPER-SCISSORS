@@ -6,21 +6,73 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .result {
+            font-size: 48px;
+            color: orangered;
+            font-weight: bolder;
+
+        }
+
+        button {
+            height: 4em;
+            width: 10em;
+            font-size: larger;
+            justify-content: center;
+            align-items: center;
+        }
+
+        p {
+            font-size: large;
+            color: darkslateblue;
+
+        }
+
+        div>* {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .buttons{
+            display: flex;
+            flex-direction: row;
+
+        }
+
+    </style>
 </head>
 
 <body>
-    <button id="rock">Rock</button>
-    <button id="paper">Paper</button>
-    <button id="scissors">Scissors</button>
-    <p class="your">Your choice is: </p>
-    <p>Your points: </p>    
-    <p class="userPoints"></p>
-    <p class="computer">Computer choice is: </p>
-    <p>Computer points: </p>
-    <p class="computerPoints"></p>
+    <div class="buttons">
+        <button id="rock">Rock</button>
+        <button id="paper">Paper</button>
+        <button id="scissors">Scissors</button>
+    </div>
+    <div>
+        <p>Your choice is: </p>
+        <p class="your"></p>
+    </div>
+
+    <div>
+        <p>Your points: </p>
+        <p class="userPoints"></p>
+    </div>
+    <div>
+        <p>Computer choice is: </p>
+        <p class="computer"></p>
+    </div>
+    <div>
+        <p>Computer points: </p>
+        <p class="computerPoints"></p>
+    </div>
     <p class="result"></p>
 
-    <script>      
+    <script>
 
         const computerPlay = () => {
             const randomNumber = Math.floor((Math.random() * 3) + 1);
@@ -28,7 +80,7 @@
             else if (randomNumber === 2) return "scissors"
             else if (randomNumber === 3) return "paper";
         };
-        
+
         let userPoints = 0;
         let computerPoints = 0;
 
@@ -39,41 +91,46 @@
             if (computerSelection === playerSelection) checkWinner()
             else if (((playerSelection === 'rock') && (computerSelection === 'paper')) ||
                 ((playerSelection === 'paper') && (computerSelection === 'scissors')) ||
-                ((playerSelection === 'scissors') && (computerSelection === 'rock'))){
-                    computerPoints++;
-                    checkWinner();
-                }
+                ((playerSelection === 'scissors') && (computerSelection === 'rock'))) {
+                computerPoints++;
+                checkWinner();
+            }
             else if (((playerSelection === 'rock') && (computerSelection === 'scissors')) ||
                 ((playerSelection === 'paper') && (computerSelection === 'rock')) ||
-                ((playerSelection === 'scissors') && (computerSelection === 'paper'))){
-                    userPoints++;
-                    checkWinner();
+                ((playerSelection === 'scissors') && (computerSelection === 'paper'))) {
+                userPoints++;
+                checkWinner();
             };
         };
 
-    const checkWinner = () =>{
-        document.querySelector(".userPoints").textContent = userPoints;
-        document.querySelector(".computerPoints").textContent = computerPoints;
-        if (userPoints===5 || computerPoints===5){
-            if(userPoints>computerPoints){
-                result.textContent = "You Win!";
-                
-            } else if(userPoints<computerPoints){
-                result.textContent = "You Lose!";
-            } else if (userPoints===computerPoints){
-                result.textContent = "Zero";               
+        const checkWinner = () => {
+            document.querySelector(".userPoints").textContent = userPoints;
+            document.querySelector(".computerPoints").textContent = computerPoints;
+            if (userPoints === 5 || computerPoints === 5) {
+                if (userPoints > computerPoints) {
+                    result.textContent = "You Win!";
+                    userPoints = 0;
+                    computerPoints = 0;
+                } else if (userPoints < computerPoints) {
+                    result.textContent = "You Lose!";
+                    userPoints = 0;
+                    computerPoints = 0;
+                } else if (userPoints === computerPoints) {
+                    result.textContent = "Zero";
+                    userPoints = 0;
+                    computerPoints = 0;
+                };
             };
         };
-    };
 
         const rockButton = document.querySelector("#rock");
-        rockButton.addEventListener("click", function(){playRound(computerPlay(),"rock");});
+        rockButton.addEventListener("click", function () { playRound(computerPlay(), "rock"); });
 
         const paperButton = document.querySelector("#paper");
-        paperButton.addEventListener("click", function(){ playRound(computerPlay(),"paper")});
+        paperButton.addEventListener("click", function () { playRound(computerPlay(), "paper") });
 
         const scissorsButton = document.querySelector("#scissors");
-        scissorsButton.addEventListener("click", function(){playRound(computerPlay(),"scissors")});
+        scissorsButton.addEventListener("click", function () { playRound(computerPlay(), "scissors") });
 
         const your = document.querySelector(".your");
         const computer = document.querySelector(".computer");
