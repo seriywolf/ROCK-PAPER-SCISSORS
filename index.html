@@ -36,34 +36,36 @@
             computer.textContent = computerSelection;
             your.textContent = playerSelection;
 
-            //if (computerSelection === playerSelection) return 0
-            if (((playerSelection === 'rock') && (computerSelection === 'paper')) ||
+            if (computerSelection === playerSelection) checkWinner()
+            else if (((playerSelection === 'rock') && (computerSelection === 'paper')) ||
                 ((playerSelection === 'paper') && (computerSelection === 'scissors')) ||
                 ((playerSelection === 'scissors') && (computerSelection === 'rock'))){
                     computerPoints++;
-                    document.querySelector(".userPoints").textContent = userPoints;
-                    document.querySelector(".computerPoints").textContent = computerPoints;
+                    checkWinner();
                 }
             else if (((playerSelection === 'rock') && (computerSelection === 'scissors')) ||
                 ((playerSelection === 'paper') && (computerSelection === 'rock')) ||
-                ((playerSelection === 'scissors') && (computerSelection === 'paper')))
-                userPoints++;
-                    document.querySelector(".userPoints").textContent = userPoints;
-                    document.querySelector(".computerPoints").textContent = computerPoints;
+                ((playerSelection === 'scissors') && (computerSelection === 'paper'))){
+                    userPoints++;
+                    checkWinner();
+            };
         };
 
-        /*const game = () => {
-            let user = 0;
-            let computer = 0;
-            if (user > computer)
-                return "You Win!"
-            else if (computer > user)
-                return "You Lose!"
-            else if (computer === user)
-                return "Equal!";
-        };*/
+    const checkWinner = () =>{
+        document.querySelector(".userPoints").textContent = userPoints;
+        document.querySelector(".computerPoints").textContent = computerPoints;
+        if (userPoints===5 || computerPoints===5){
+            if(userPoints>computerPoints){
+                result.textContent = "You Win!";
+                
+            } else if(userPoints<computerPoints){
+                result.textContent = "You Lose!";
+            } else if (userPoints===computerPoints){
+                result.textContent = "Zero";               
+            };
+        };
+    };
 
-       
         const rockButton = document.querySelector("#rock");
         rockButton.addEventListener("click", function(){playRound(computerPlay(),"rock");});
 
@@ -75,7 +77,6 @@
 
         const your = document.querySelector(".your");
         const computer = document.querySelector(".computer");
-
         const result = document.querySelector(".result");
 
         //result.textContent = 
