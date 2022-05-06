@@ -13,8 +13,13 @@
     <button id="paper">Paper</button>
     <button id="scissors">Scissors</button>
     <p class="your">Your choice is: </p>
+    <p>Your points: </p>    
+    <p class="userPoints"></p>
     <p class="computer">Computer choice is: </p>
+    <p>Computer points: </p>
+    <p class="computerPoints"></p>
     <p class="result"></p>
+
     <script>      
 
         const computerPlay = () => {
@@ -24,23 +29,30 @@
             else if (randomNumber === 3) return "paper";
         };
         
+        let userPoints = 0;
+        let computerPoints = 0;
 
         const playRound = (computerSelection, playerSelection) => {
             computer.textContent = computerSelection;
             your.textContent = playerSelection;
 
-            if (computerSelection === playerSelection) return 0
-            else if (((playerSelection === 'rock') && (computerSelection === 'paper')) ||
+            //if (computerSelection === playerSelection) return 0
+            if (((playerSelection === 'rock') && (computerSelection === 'paper')) ||
                 ((playerSelection === 'paper') && (computerSelection === 'scissors')) ||
-                ((playerSelection === 'scissors') && (computerSelection === 'rock')))
-                return -1
+                ((playerSelection === 'scissors') && (computerSelection === 'rock'))){
+                    computerPoints++;
+                    document.querySelector(".userPoints").textContent = userPoints;
+                    document.querySelector(".computerPoints").textContent = computerPoints;
+                }
             else if (((playerSelection === 'rock') && (computerSelection === 'scissors')) ||
                 ((playerSelection === 'paper') && (computerSelection === 'rock')) ||
                 ((playerSelection === 'scissors') && (computerSelection === 'paper')))
-                return 1
+                userPoints++;
+                    document.querySelector(".userPoints").textContent = userPoints;
+                    document.querySelector(".computerPoints").textContent = computerPoints;
         };
 
-        const game = () => {
+        /*const game = () => {
             let user = 0;
             let computer = 0;
             if (user > computer)
@@ -49,14 +61,11 @@
                 return "You Lose!"
             else if (computer === user)
                 return "Equal!";
-
-        }
+        };*/
 
        
         const rockButton = document.querySelector("#rock");
-        rockButton.addEventListener("click", function(){
-             playRound(computerPlay(),"rock");
-            });
+        rockButton.addEventListener("click", function(){playRound(computerPlay(),"rock");});
 
         const paperButton = document.querySelector("#paper");
         paperButton.addEventListener("click", function(){ playRound(computerPlay(),"paper")});
@@ -66,6 +75,7 @@
 
         const your = document.querySelector(".your");
         const computer = document.querySelector(".computer");
+
         const result = document.querySelector(".result");
 
         //result.textContent = 
